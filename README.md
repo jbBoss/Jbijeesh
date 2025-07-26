@@ -15,7 +15,7 @@ npm run storybook
 
 ## to build the docker file
 
-docker build -t bijeesh_jithu_coding_assignment12 .
+"docker build -t bijeesh_jithu_coding_assignment13 ."
 
 ## How to Run the Project Locally
 
