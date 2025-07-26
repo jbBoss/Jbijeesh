@@ -4,10 +4,26 @@ This project is a React + Storybook-based UI component library containerized wit
 
 - Production build hosted via Docker
 - Working directory: `bijeesh_jithu_ui_garden`
-- Container name: `bijeesh_jithu_coding_assignment12`
+- Container name: `bijeesh_jithu_coding_assignment13`
 - Runs on: `localhost:8083`
 
 ---
+
+## Components Included
+
+- Button (Default + Disabled)
+- Label
+- Text
+- Table
+  - TableHeader
+  - TableRow
+  - TableCell
+  - TableFooter
+- Dropdown
+- Radio Button
+- Img
+- Hero Image
+- Card
 
 ## run the command to see all the components and their disabkes state on storybook
 
@@ -19,7 +35,7 @@ npm run storybook
 
 ## How to Run the Project Locally
 
-docker run -d -p 8083:8083 --name bijeesh_jithu_coding_assignment12 bijeesh_jithu_coding_assignment12
+docker run -d -p 8083:8083 --name bijeesh_jithu_coding_assignment12 bijeesh_jithu_coding_assignment13
 and open the url on your browser
 http://localhost:8083
 
