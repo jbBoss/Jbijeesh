@@ -29,6 +29,10 @@ This project is a React + Storybook-based UI component library containerized wit
 
 npm run storybook
 
+## to test Components
+
+npm run test
+
 ## to build the docker file
 
 "docker build -t bijeesh_jithu_coding_assignment13 ."
@@ -38,10 +42,6 @@ npm run storybook
 docker run -d -p 8083:8083 --name bijeesh_jithu_coding_assignment12 bijeesh_jithu_coding_assignment13
 and open the url on your browser
 http://localhost:8083
-
-## to test Components
-
-npm run test
 
 ### 1. Make sure Docker is installed
 
