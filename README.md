@@ -33,20 +33,20 @@ npm run storybook
 
 npm run test
 
-## to build the docker file
+      ## to build the docker file
 
-"docker build -t bijeesh_jithu_coding_assignment13 ."
+      "docker build -t bijeesh_jithu_coding_assignment13 ."
 
-## How to Run the Project Locally
+      ## How to Run the Project Locally
 
-docker run -d -p 8083:8083 --name bijeesh_jithu_coding_assignment12 bijeesh_jithu_coding_assignment13
-and open the url on your browser
-http://localhost:8083
+      docker run -d -p 8083:8083 --name bijeesh_jithu_coding_assignment12 bijeesh_jithu_coding_assignment13
+      and open the url on your browser
+      http://localhost:8083
 
-### 1. Make sure Docker is installed
+      ### 1. Make sure Docker is installed
 
-Download Docker Desktop from: https://www.docker.com/products/docker-desktop/
+      Download Docker Desktop from: https://www.docker.com/products/docker-desktop/
 
-<!-- to run localy  -->
+      <!-- to run localy  -->
 
-npm start
+      npm start
