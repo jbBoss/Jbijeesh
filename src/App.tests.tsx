@@ -1,9 +1,17 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+test("renders the portfolio page", () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+  // Check for the main heading
+  const headingElement = screen.getByText(
+    /Alex Johnson - Senior Frontend Developer/i,
+  );
+  expect(headingElement).toBeInTheDocument();
+
+  // Check for a featured project heading
+  const projectSectionTitle = screen.getByText(/Featured Projects/i);
+  expect(projectSectionTitle).toBeInTheDocument();
 });
