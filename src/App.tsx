@@ -1,175 +1,216 @@
-import React from "react";
-
-// Import the components we'll use for the portfolio
+import React, { useState } from "react";
 import Button from "./components/Button";
 import Card from "./components/Card";
 import HeroImage from "./components/HeroImage";
+import Img from "./components/Img";
 import Label from "./components/Label";
+import Text from "./components/Text";
+import {
+  Table,
+  TableHeader,
+  TableRow,
+  TableCell,
+  TableFooter,
+} from "./components/Table";
+import { styles } from "./style"; // Import styles from the new file
 
-// Note: Dropdown, RadioButton, Img, and Table components are not used in this portfolio layout.
+function Portfolio() {
+  const [disabled, setDisabled] = useState(false);
 
-function App() {
-  // --- Data for the Portfolio Sections ---
-
-  // 1. Basic Information Data
-  const basicInfo = {
-    name: "Alex Doe",
-    title: "Full-Stack Web Developer",
-    imageUrl:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop", // A professional-looking hero image
+  // --- Portfolio Data ---
+  const profileData = {
+    name: "Alex Johnson",
+    title: "Senior Frontend Developer",
+    bio: "I build responsive, accessible web applications with modern JavaScript frameworks. Focused on creating intuitive user experiences with clean, maintainable code.",
+    contact: {
+      email: "alex.johnson@example.com",
+      location: "San Francisco, CA",
+    },
   };
 
-  // 2. Work (Projects) Data
   const workData = [
     {
-      id: "proj1",
+      id: "work1",
       title: "E-commerce Platform",
       description:
-        "A full-featured online store built with the MERN stack, including payment gateway integration.",
-      imageSrc:
-        "https://images.unsplash.com/photo-1522199755839-a2bacb67c546?q=80&w=2072&auto=format&fit=crop",
-      link: "#", // Placeholder for actual project link
-      techList: ["React", "Node.js", "Express", "MongoDB", "Stripe API"],
+        "A full-stack e-commerce site with custom CMS, payment integration, and responsive UI.",
+      image:
+        "https://cdn.dribbble.com/userupload/4151708/file/original-b0885f83d06b2420311f99990de50e95.png?resize=1024x768",
+      link: "#",
+      techList: ["React", "Node.js", "Express", "MongoDB"],
     },
     {
-      id: "proj2",
-      title: "Project Management Dashboard",
+      id: "work2",
+      title: "Project Management Tool",
       description:
-        "A collaborative tool for teams to track tasks, deadlines, and project progress in real-time.",
-      imageSrc:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop",
+        "Collaborative tool for teams to manage tasks, track progress, and communicate effectively.",
+      image:
+        "https://cdn.dribbble.com/userupload/12973167/file/original-2c35f992383c267e88c1c68d83c3e62f.png?resize=1024x768",
       link: "#",
-      techList: ["Vue.js", "Firebase", "Vuetify"],
+      techList: ["TypeScript", "Firebase", "Styled-Components", "Next.js"],
+    },
+    {
+      id: "work3",
+      title: "Mobile Banking App",
+      description:
+        "Secure mobile application for personal banking with biometric login and transaction history.",
+      image:
+        "https://cdn.dribbble.com/userupload/10839845/file/original-1b9a9addc5753039d67a14e0d7718055.png?resize=1024x768",
+      link: "#",
+      techList: ["React Native", "Redux", "REST API", "Jest"],
     },
   ];
 
-  // 3. Skills Data
   const skillsData = {
-    description:
-      "I specialize in building responsive and scalable web applications from the ground up, with a strong focus on user experience and clean code.",
-    languages: [
-      "JavaScript (ES6+)",
-      "TypeScript",
-      "HTML5",
-      "CSS3/Sass",
-      "Python",
-    ],
-    tools: ["Git & GitHub", "Webpack", "Docker", "Jest", "Figma"],
+    languages: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3/Sass"],
+    frameworks: ["React", "Next.js", "Node.js", "Express"],
+    tools: ["Git & GitHub", "Webpack", "Docker", "Figma", "Jest"],
   };
 
-  // 4. Resources Data
   const resourcesData = [
     {
       id: "res1",
-      title: "MDN Web Docs",
-      summary:
-        "The ultimate resource for web standards and documentation for HTML, CSS, and JavaScript.",
-      imageSrc:
-        "https://i.pinimg.com/originals/c3/b5/96/c3b59683c31671151a44c231a45778ba.png", // Using an icon-like image
-      link: "https://developer.mozilla.org/",
+      title: "React Documentation",
+      summary: "Official React documentation for learning and reference.",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRff36aCj4x2y5i5Yf322bqj3XF-6hRRzSe5Q&s",
+      link: "https://react.dev/",
     },
     {
       id: "res2",
-      title: "React Official Docs",
+      title: "MDN Web Docs",
       summary:
-        "The best place to learn React, from the basics to advanced concepts, directly from the source.",
-      imageSrc:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2h8-p2I-_oWrKq51noFSIZ0t02G9t4f3a_A&s",
-      link: "https://react.dev/",
+        "Comprehensive resource for open web standards including HTML, CSS, and JavaScript.",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZq54tK6aG-yTrqCglf0gH2mPAbC01B_YcEw&s",
+      link: "https://developer.mozilla.org/",
+    },
+    {
+      id: "res3",
+      title: "Frontend Masters",
+      summary: "In-depth courses on modern frontend development techniques.",
+      image: "https://frontendmasters.com/static-assets/core/og-image.jpg",
+      link: "https://frontendmasters.com/",
     },
   ];
 
-  // --- Inline Styles for Layout ---
-  const styles = {
-    page: { padding: "0 0 4rem 0", backgroundColor: "#f9f9f9" },
-    content: { maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" },
-    section: { margin: "4rem 0" },
-    sectionTitle: {
-      fontSize: "2.5rem",
-      marginBottom: "2rem",
-      borderBottom: "2px solid #ddd",
-      paddingBottom: "0.5rem",
-    },
-    grid: {
-      display: "grid",
-      gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-      gap: "2rem",
-    },
-    skillsContainer: { display: "flex", flexDirection: "column", gap: "1rem" },
-    skillsList: {
-      display: "flex",
-      flexWrap: "wrap",
-      gap: "10px",
-      padding: "0",
-      listStyle: "none",
-    },
-    skillItem: {
-      backgroundColor: "#e0e0e0",
-      padding: "5px 12px",
-      borderRadius: "15px",
-      fontSize: "0.9rem",
-    },
-    cardFooter: { marginTop: "1rem" },
-    cardTech: { margin: "1rem 0", fontStyle: "italic", color: "#555" },
+  const experienceData = {
+    headers: ["Period", "Company", "Role", "Technologies"],
+    rows: [
+      {
+        id: "exp1",
+        period: "2020-Present",
+        company: "Tech Innovations Inc.",
+        role: "Senior Frontend Developer",
+        tech: "React, TypeScript, GraphQL",
+      },
+      {
+        id: "exp2",
+        period: "2018-2020",
+        company: "Digital Solutions LLC",
+        role: "Frontend Developer",
+        tech: "JavaScript, Angular, Node.js",
+      },
+      {
+        id: "exp3",
+        period: "2016-2018",
+        company: "WebCraft Studio",
+        role: "Junior Developer",
+        tech: "HTML5, CSS3, jQuery",
+      },
+    ],
+  };
+
+  const handleContactClick = () => {
+    window.location.href = `mailto:${profileData.contact.email}`;
   };
 
   return (
-    <div style={styles.page}>
-      {/* 1. Basic Information Section */}
+    <div style={styles.portfolioContainer}>
+      {/* --- 1. Hero Section --- */}
       <HeroImage
-        imageUrl={basicInfo.imageUrl}
-        heading={basicInfo.name}
-        subheading={basicInfo.title}
+        imageUrl="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1740&q=80"
+        heading={`${profileData.name} - ${profileData.title}`}
+        subheading={profileData.bio}
+        disabled={disabled}
       />
 
-      <div style={styles.content}>
-        {/* 2. Work Section */}
+      <div style={styles.heroButtonsContainer}>
+        <Button
+          label="Contact Me"
+          disabled={disabled}
+          onClick={handleContactClick}
+        />
+        <Button
+          label="View GitHub"
+          disabled={disabled}
+          onClick={() => window.open("https://github.com", "_blank")}
+        />
+      </div>
+
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
+        {/* --- 2. Work Section --- */}
         <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Work</h2>
-          <div style={styles.grid}>
+          <Text content="Featured Projects" size="large" disabled={disabled} />
+          <div style={styles.workGrid}>
             {workData.map((project) => (
-              <Card
-                key={project.id}
-                title={project.title}
-                description={project.description}
-                imageSrc={project.imageSrc}
-              >
-                {/* Custom content passed as children to the Card component */}
-                <div style={styles.cardFooter}>
-                  <p style={styles.cardTech}>
-                    <strong>Tech:</strong> {project.techList.join(", ")}
-                  </p>
-                  <Button
-                    label="View Project"
-                    onClick={() => window.open(project.link, "_blank")}
-                  />
+              <div key={project.id}>
+                <Card
+                  title={project.title}
+                  description={project.description}
+                  imageSrc={project.image}
+                  disabled={disabled}
+                />
+                <div style={styles.techContainer}>
+                  <Label text="Technologies Used:" disabled={disabled} />
+                  <div style={styles.techList}>
+                    {project.techList.map((tech) => (
+                      <span key={tech} style={styles.techTag}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </Card>
+                <Button
+                  label="View Project"
+                  disabled={disabled}
+                  onClick={() => window.open(project.link, "_blank")}
+                />
+              </div>
             ))}
           </div>
         </section>
 
-        {/* 3. Skills Section */}
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Skills</h2>
-          <div style={styles.skillsContainer}>
-            <p>{skillsData.description}</p>
+        {/* --- 3. Skills Section --- */}
+        <section style={styles.largeSection}>
+          <Text content="Technical Skills" size="large" disabled={disabled} />
+          <div style={styles.skillsGrid}>
             <div>
-              <Label text="Languages / Frameworks" />
-              <ul style={styles.skillsList}>
+              <Label text="Languages" disabled={disabled} />
+              <ul style={styles.skillList}>
                 {skillsData.languages.map((lang) => (
-                  <li key={lang} style={styles.skillItem}>
-                    {lang}
+                  <li key={lang} style={styles.skillListItem}>
+                    <Text content={lang} disabled={disabled} />
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <Label text="Tools" />
-              <ul style={styles.skillsList}>
+              <Label text="Frameworks & Libraries" disabled={disabled} />
+              <ul style={styles.skillList}>
+                {skillsData.frameworks.map((fw) => (
+                  <li key={fw} style={styles.skillListItem}>
+                    <Text content={fw} disabled={disabled} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <Label text="Tools & Platforms" disabled={disabled} />
+              <ul style={styles.skillList}>
                 {skillsData.tools.map((tool) => (
-                  <li key={tool} style={styles.skillItem}>
-                    {tool}
+                  <li key={tool} style={styles.skillListItem}>
+                    <Text content={tool} disabled={disabled} />
                   </li>
                 ))}
               </ul>
@@ -177,30 +218,101 @@ function App() {
           </div>
         </section>
 
-        {/* 4. Resources Section */}
-        <section style={styles.section}>
-          <h2 style={styles.sectionTitle}>Resources</h2>
-          <div style={styles.grid}>
+        {/* --- 4. Experience Table --- */}
+        <section style={styles.largeSection}>
+          <Text
+            content="Professional Experience"
+            size="large"
+            disabled={disabled}
+          />
+          <div style={styles.tableContainer}>
+            <Table disabled={disabled}>
+              <TableHeader
+                headers={experienceData.headers}
+                disabled={disabled}
+              />
+              <tbody>
+                {experienceData.rows.map((row) => (
+                  <TableRow key={row.id} disabled={disabled}>
+                    <TableCell content={row.period} disabled={disabled} />
+                    <TableCell content={row.company} disabled={disabled} />
+                    <TableCell content={row.role} disabled={disabled} />
+                    <TableCell content={row.tech} disabled={disabled} />
+                  </TableRow>
+                ))}
+              </tbody>
+              <TableFooter
+                content={`${experienceData.rows.length} positions listed`}
+                disabled={disabled}
+              />
+            </Table>
+          </div>
+        </section>
+
+        {/* --- 5. Resources Section --- */}
+        <section style={styles.largeSection}>
+          <Text content="Learning Resources" size="large" disabled={disabled} />
+          <Text
+            content="Here are some resources I recommend for developers"
+            disabled={disabled}
+          />
+          <div style={styles.resourcesGrid}>
             {resourcesData.map((resource) => (
-              <Card
-                key={resource.id}
-                title={resource.title}
-                description={resource.summary} // Using description prop for summary
-                imageSrc={resource.imageSrc}
-              >
-                <div style={styles.cardFooter}>
-                  <Button
-                    label="Learn More"
-                    onClick={() => window.open(resource.link, "_blank")}
-                  />
-                </div>
-              </Card>
+              <div key={resource.id}>
+                <Card
+                  title={resource.title}
+                  description={resource.summary}
+                  imageSrc={resource.image}
+                  disabled={disabled}
+                />
+                <Button
+                  label="Visit Resource"
+                  disabled={disabled}
+                  onClick={() => window.open(resource.link, "_blank")}
+                />
+              </div>
             ))}
           </div>
         </section>
+
+        {/* --- Contact Footer --- */}
+        <footer style={styles.footer}>
+          <Img
+            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80"
+            alt="Profile"
+            width="80px"
+            disabled={disabled}
+          />
+          <div style={styles.footerName}>
+            <Text content={profileData.name} size="large" disabled={disabled} />
+          </div>
+          <div style={styles.footerEmail}>
+            <Text content={profileData.contact.email} disabled={disabled} />
+          </div>
+          <div style={styles.footerLocation}>
+            <Text content={profileData.contact.location} disabled={disabled} />
+          </div>
+          <div style={styles.footerButtonsContainer}>
+            <Button
+              label="LinkedIn"
+              disabled={disabled}
+              onClick={() => window.open("https://linkedin.com", "_blank")}
+            />
+            <Button
+              label="GitHub"
+              disabled={disabled}
+              onClick={() => window.open("https://github.com", "_blank")}
+            />
+            <Button
+              label="Twitter"
+              disabled={disabled}
+              onClick={() => window.open("https://twitter.com", "_blank")}
+            />
+          </div>
+        </footer>
       </div>
     </div>
   );
 }
 
-export default App;
+export default Portfolio;

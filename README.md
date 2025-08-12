@@ -46,3 +46,7 @@ http://localhost:8083
 ### 1. Make sure Docker is installed
 
 Download Docker Desktop from: https://www.docker.com/products/docker-desktop/
+
+<!-- to run localy  -->
+
+npm start
