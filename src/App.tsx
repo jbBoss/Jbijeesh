@@ -7,6 +7,7 @@ import Img from "./components/Img";
 import Label from "./components/Label";
 import RadioButton from "./components/RadioButton";
 // Import all Table components from the index file
+// demo of all athe components
 import {
   Table,
   TableHeader,
