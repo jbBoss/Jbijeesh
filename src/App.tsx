@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import Button from "./components/Button";
 import Card from "./components/Card";
+import Dropdown from "./components/Dropdown";
 import HeroImage from "./components/HeroImage";
 import Img from "./components/Img";
 import Label from "./components/Label";
-import Text from "./components/Text";
+import RadioButton from "./components/RadioButton";
+// Import all Table components from the index file
 import {
   Table,
   TableHeader,
@@ -12,307 +14,138 @@ import {
   TableCell,
   TableFooter,
 } from "./components/Table";
-import { styles } from "./style"; // Import styles from the new file
 
-function Portfolio() {
+function App() {
   const [disabled, setDisabled] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("Option 1");
+  const [radioSelection, setRadioSelection] = useState("cat");
 
-  // --- Portfolio Data ---
-  const profileData = {
-    name: "Alex Johnson",
-    title: "Senior Frontend Developer",
-    bio: "I build responsive, accessible web applications with modern JavaScript frameworks. Focused on creating intuitive user experiences with clean, maintainable code.",
-    contact: {
-      email: "alex.johnson@example.com",
-      location: "San Francisco, CA",
-    },
+  const handleClick = () => {
+    setDisabled(true); // This will disable all components
   };
 
-  const workData = [
-    {
-      id: "work1",
-      title: "E-commerce Platform",
-      description:
-        "A full-stack e-commerce site with custom CMS, payment integration, and responsive UI.",
-      image:
-        "https://cdn.dribbble.com/userupload/4151708/file/original-b0885f83d06b2420311f99990de50e95.png?resize=1024x768",
-      link: "#",
-      techList: ["React", "Node.js", "Express", "MongoDB"],
-    },
-    {
-      id: "work2",
-      title: "Project Management Tool",
-      description:
-        "Collaborative tool for teams to manage tasks, track progress, and communicate effectively.",
-      image:
-        "https://cdn.dribbble.com/userupload/12973167/file/original-2c35f992383c267e88c1c68d83c3e62f.png?resize=1024x768",
-      link: "#",
-      techList: ["TypeScript", "Firebase", "Styled-Components", "Next.js"],
-    },
-    {
-      id: "work3",
-      title: "Mobile Banking App",
-      description:
-        "Secure mobile application for personal banking with biometric login and transaction history.",
-      image:
-        "https://cdn.dribbble.com/userupload/10839845/file/original-1b9a9addc5753039d67a14e0d7718055.png?resize=1024x768",
-      link: "#",
-      techList: ["React Native", "Redux", "REST API", "Jest"],
-    },
+  const dropdownOptions = ["Option 1", "Option 2", "Option 3"];
+  const tableHeaders = ["User ID", "Name", "Role"];
+  const tableRows = [
+    { id: "u001", name: "Alice", role: "Admin" },
+    { id: "u002", name: "Bob", role: "Editor" },
+    { id: "u003", name: "Charlie", role: "Viewer" },
   ];
-
-  const skillsData = {
-    languages: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3/Sass"],
-    frameworks: ["React", "Next.js", "Node.js", "Express"],
-    tools: ["Git & GitHub", "Webpack", "Docker", "Figma", "Jest"],
-  };
-
-  const resourcesData = [
-    {
-      id: "res1",
-      title: "React Documentation",
-      summary: "Official React documentation for learning and reference.",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRff36aCj4x2y5i5Yf322bqj3XF-6hRRzSe5Q&s",
-      link: "https://react.dev/",
-    },
-    {
-      id: "res2",
-      title: "MDN Web Docs",
-      summary:
-        "Comprehensive resource for open web standards including HTML, CSS, and JavaScript.",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZq54tK6aG-yTrqCglf0gH2mPAbC01B_YcEw&s",
-      link: "https://developer.mozilla.org/",
-    },
-    {
-      id: "res3",
-      title: "Frontend Masters",
-      summary: "In-depth courses on modern frontend development techniques.",
-      image: "https://frontendmasters.com/static-assets/core/og-image.jpg",
-      link: "https://frontendmasters.com/",
-    },
-  ];
-
-  const experienceData = {
-    headers: ["Period", "Company", "Role", "Technologies"],
-    rows: [
-      {
-        id: "exp1",
-        period: "2020-Present",
-        company: "Tech Innovations Inc.",
-        role: "Senior Frontend Developer",
-        tech: "React, TypeScript, GraphQL",
-      },
-      {
-        id: "exp2",
-        period: "2018-2020",
-        company: "Digital Solutions LLC",
-        role: "Frontend Developer",
-        tech: "JavaScript, Angular, Node.js",
-      },
-      {
-        id: "exp3",
-        period: "2016-2018",
-        company: "WebCraft Studio",
-        role: "Junior Developer",
-        tech: "HTML5, CSS3, jQuery",
-      },
-    ],
-  };
-
-  const handleContactClick = () => {
-    window.location.href = `mailto:${profileData.contact.email}`;
-  };
 
   return (
-    <div style={styles.portfolioContainer}>
-      {/* --- 1. Hero Section --- */}
+    <div style={{ padding: "2rem" }}>
       <HeroImage
-        imageUrl="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1740&q=80"
-        heading={`${profileData.name} - ${profileData.title}`}
-        subheading={profileData.bio}
+        imageUrl="https://i.pinimg.com/474x/66/4c/2a/664c2a7bfbb970b0aa56355bc284cfa7.jpg"
+        heading="Component Library"
+        subheading="Click the button to disable all components."
         disabled={disabled}
       />
 
-      <div style={styles.heroButtonsContainer}>
+      <div style={{ padding: "2rem", textAlign: "center" }}>
         <Button
-          label="Contact Me"
+          label={disabled ? "All Components Disabled" : "Click Me to Disable"}
           disabled={disabled}
-          onClick={handleContactClick}
-        />
-        <Button
-          label="View GitHub"
-          disabled={disabled}
-          onClick={() => window.open("https://github.com", "_blank")}
+          onClick={handleClick}
         />
       </div>
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "0 2rem" }}>
-        {/* --- 2. Work Section --- */}
-        <section style={styles.section}>
-          <Text content="Featured Projects" size="large" disabled={disabled} />
-          <div style={styles.workGrid}>
-            {workData.map((project) => (
-              <div key={project.id}>
-                <Card
-                  title={project.title}
-                  description={project.description}
-                  imageSrc={project.image}
-                  disabled={disabled}
-                />
-                <div style={styles.techContainer}>
-                  <Label text="Technologies Used:" disabled={disabled} />
-                  <div style={styles.techList}>
-                    {project.techList.map((tech) => (
-                      <span key={tech} style={styles.techTag}>
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <Button
-                  label="View Project"
-                  disabled={disabled}
-                  onClick={() => window.open(project.link, "_blank")}
-                />
-              </div>
+      {/* Table Component */}
+      <div style={{ margin: "2rem 0" }}>
+        <Table disabled={disabled}>
+          <TableHeader headers={tableHeaders} disabled={disabled} />
+          <tbody>
+            {tableRows.map((row) => (
+              <TableRow key={row.id} disabled={disabled}>
+                <TableCell content={row.id} disabled={disabled} />
+                <TableCell content={row.name} disabled={disabled} />
+                <TableCell content={row.role} disabled={disabled} />
+              </TableRow>
             ))}
-          </div>
-        </section>
+          </tbody>
+          <TableFooter content="End of user data" disabled={disabled} />
+        </Table>
+      </div>
 
-        {/* --- 3. Skills Section --- */}
-        <section style={styles.largeSection}>
-          <Text content="Technical Skills" size="large" disabled={disabled} />
-          <div style={styles.skillsGrid}>
-            <div>
-              <Label text="Languages" disabled={disabled} />
-              <ul style={styles.skillList}>
-                {skillsData.languages.map((lang) => (
-                  <li key={lang} style={styles.skillListItem}>
-                    <Text content={lang} disabled={disabled} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <Label text="Frameworks & Libraries" disabled={disabled} />
-              <ul style={styles.skillList}>
-                {skillsData.frameworks.map((fw) => (
-                  <li key={fw} style={styles.skillListItem}>
-                    <Text content={fw} disabled={disabled} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <Label text="Tools & Platforms" disabled={disabled} />
-              <ul style={styles.skillList}>
-                {skillsData.tools.map((tool) => (
-                  <li key={tool} style={styles.skillListItem}>
-                    <Text content={tool} disabled={disabled} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* --- 4. Experience Table --- */}
-        <section style={styles.largeSection}>
-          <Text
-            content="Professional Experience"
-            size="large"
-            disabled={disabled}
-          />
-          <div style={styles.tableContainer}>
-            <Table disabled={disabled}>
-              <TableHeader
-                headers={experienceData.headers}
-                disabled={disabled}
-              />
-              <tbody>
-                {experienceData.rows.map((row) => (
-                  <TableRow key={row.id} disabled={disabled}>
-                    <TableCell content={row.period} disabled={disabled} />
-                    <TableCell content={row.company} disabled={disabled} />
-                    <TableCell content={row.role} disabled={disabled} />
-                    <TableCell content={row.tech} disabled={disabled} />
-                  </TableRow>
-                ))}
-              </tbody>
-              <TableFooter
-                content={`${experienceData.rows.length} positions listed`}
-                disabled={disabled}
-              />
-            </Table>
-          </div>
-        </section>
-
-        {/* --- 5. Resources Section --- */}
-        <section style={styles.largeSection}>
-          <Text content="Learning Resources" size="large" disabled={disabled} />
-          <Text
-            content="Here are some resources I recommend for developers"
-            disabled={disabled}
-          />
-          <div style={styles.resourcesGrid}>
-            {resourcesData.map((resource) => (
-              <div key={resource.id}>
-                <Card
-                  title={resource.title}
-                  description={resource.summary}
-                  imageSrc={resource.image}
-                  disabled={disabled}
-                />
-                <Button
-                  label="Visit Resource"
-                  disabled={disabled}
-                  onClick={() => window.open(resource.link, "_blank")}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* --- Contact Footer --- */}
-        <footer style={styles.footer}>
-          <Img
-            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80"
-            alt="Profile"
-            width="80px"
-            disabled={disabled}
-          />
-          <div style={styles.footerName}>
-            <Text content={profileData.name} size="large" disabled={disabled} />
-          </div>
-          <div style={styles.footerEmail}>
-            <Text content={profileData.contact.email} disabled={disabled} />
-          </div>
-          <div style={styles.footerLocation}>
-            <Text content={profileData.contact.location} disabled={disabled} />
-          </div>
-          <div style={styles.footerButtonsContainer}>
-            <Button
-              label="LinkedIn"
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "2rem",
+          marginTop: "1rem",
+          alignItems: "flex-start",
+          flexWrap: "wrap",
+        }}
+      >
+        <Card
+          title="Sample Card"
+          description="This card will be disabled."
+          imageSrc="https://i0.wp.com/www.wonderslist.com/wp-content/uploads/2012/09/funny-baby-faces.jpg"
+          disabled={disabled}
+        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1.5rem",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "0.5rem",
+            }}
+          >
+            <Label text="Choose an option" disabled={disabled} />
+            <Dropdown
+              options={dropdownOptions}
+              selected={selectedOption}
+              onChange={setSelectedOption}
               disabled={disabled}
-              onClick={() => window.open("https://linkedin.com", "_blank")}
-            />
-            <Button
-              label="GitHub"
-              disabled={disabled}
-              onClick={() => window.open("https://github.com", "_blank")}
-            />
-            <Button
-              label="Twitter"
-              disabled={disabled}
-              onClick={() => window.open("https://twitter.com", "_blank")}
             />
           </div>
-        </footer>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.5rem",
+              border: "1px solid #ccc",
+              padding: "1rem",
+              borderRadius: "8px",
+            }}
+          >
+            <Label text="Select an Animal" disabled={disabled} />
+            <RadioButton
+              id="radio-cat"
+              name="animal"
+              value="cat"
+              label="Cat"
+              checked={radioSelection === "cat"}
+              onChange={setRadioSelection}
+              disabled={disabled}
+            />
+            <RadioButton
+              id="radio-dog"
+              name="animal"
+              value="dog"
+              label="Dog"
+              checked={radioSelection === "dog"}
+              onChange={setRadioSelection}
+              disabled={disabled}
+            />
+          </div>
+        </div>
+        <Img
+          src="https://www.shutterstock.com/image-photo/closeup-portrait-fluffy-purebred-cat-600nw-2447243735.jpg"
+          alt="A fluffy cat"
+          width="300px"
+          disabled={disabled}
+        />
       </div>
     </div>
   );
 }
 
-export default Portfolio;
+export default App;
