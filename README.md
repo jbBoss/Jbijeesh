@@ -49,4 +49,4 @@ Download Docker Desktop from: https://www.docker.com/products/docker-desktop/
 
   <!-- to run localy  -->
 
-npm start
+npm start to view
