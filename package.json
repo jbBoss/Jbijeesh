@@ -2,12 +2,14 @@
   "name": "bijeesh_jithu_ui-garden",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://your-username.github.io/bijeesh_jithu_ui-garden",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.126",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "gh-pages": "^6.3.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-scripts": "5.0.1",
@@ -23,7 +25,9 @@
     "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
