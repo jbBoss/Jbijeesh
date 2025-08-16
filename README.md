@@ -39,7 +39,7 @@ docker build -t bijeesh_jithu_portfolio .
 
 ## How to Run the Project Locally
 
-docker run -d -p 8083:8083 --name bijeesh_jithu_portfolio bijeesh_jithu_portfolio
+docker run -d -p 5575:5575 --name bijeesh_jithu_portfolio_container bijeesh_jithu_portfolio
 
 and open the url on your browser
 http://localhost:5575/

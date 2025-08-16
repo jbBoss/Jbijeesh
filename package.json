@@ -2,7 +2,7 @@
   "name": "bijeesh_jithu_ui-garden",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "https://jbBoss.github.io/Jbijeesh",
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
     "@types/jest": "^27.5.2",

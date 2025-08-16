@@ -21,7 +21,7 @@ RUN rm /etc/nginx/conf.d/default.conf
 # Copy our custom Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d
 
-# Expose port 80 to the outside world
+# Expose port 80, since that's what Nginx is listening on
 EXPOSE 80
 
 # Start Nginx when the container launches
