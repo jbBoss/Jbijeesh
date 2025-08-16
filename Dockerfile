@@ -1,37 +1,28 @@
-# Dockerfile
+# Stage 1: Build the React application
+FROM node:18-alpine AS build
 
-# Stage 1: Build React app
-FROM node:18 AS build
-
-# Set working directory
 WORKDIR /app
 
-# Copy files
-COPY package.json package-lock.json ./
+COPY package*.json ./
 RUN npm install
 
 COPY . .
-
-# Build production React app
 RUN npm run build
 
-# Stage 2: Serve with Nginx
+# Stage 2: Serve the application with Nginx
 FROM nginx:stable-alpine
 
-# Custom working directory name
-WORKDIR /bijeesh_jithu_ui_garden
-
-# Remove default nginx static content
-RUN rm -rf /usr/share/nginx/html/*
-
-# Copy built app from previous stage to nginx directory
+# Copy the built app from the 'build' stage
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose port 8083
-EXPOSE 8083
+# Remove the default Nginx configuration
+RUN rm /etc/nginx/conf.d/default.conf
 
+# Copy our custom Nginx configuration
+COPY nginx.conf /etc/nginx/conf.d
 
-RUN sed -i 's/80;/8083;/' /etc/nginx/conf.d/default.conf
+# Expose port 80 to the outside world
+EXPOSE 80
 
-
+# Start Nginx when the container launches
 CMD ["nginx", "-g", "daemon off;"]

@@ -35,13 +35,14 @@ npm run test
 
 ## to build the docker file
 
-"docker build -t bijeesh_jithu_coding_assignment13 ."
+docker build -t bijeesh_jithu_portfolio .
 
 ## How to Run the Project Locally
 
-docker run -d -p 8083:8083 --name bijeesh_jithu_coding_assignment12 bijeesh_jithu_coding_assignment13
+docker run -d -p 8083:8083 --name bijeesh_jithu_portfolio bijeesh_jithu_portfolio
+
 and open the url on your browser
-http://localhost:8083
+http://localhost:5575/
 
 ### 1. Make sure Docker is installed
 
